@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "none",
+        "strict": true,
+        "out": "../.debug/main.js"
+    },
+    "references": [
+        {
+            "path": "../ovillo/src"
+        }
+    ]
+}
