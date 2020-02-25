@@ -2,6 +2,5 @@
 SET mypath=%~dp0
 pushd %mypath%
     SET mypath = %cd%
-    CALL %mypath%\deploy.bat
-    START "" %mypath%\.deploy\index.htm
+    CALL %mypath%\ovillo\bat\make-deploy.bat %mypath%\src
 popd
