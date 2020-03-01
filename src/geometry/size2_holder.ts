@@ -1,6 +1,6 @@
 module Geometry
 {
-    export interface SizeHolder
+    export interface Size2Holder
     {
         size: Size;
     }

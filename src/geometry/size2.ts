@@ -1,11 +1,11 @@
 module Geometry
 {
-    export class Size implements Size
+    export class Size
     {
         public readonly width: number;
         public readonly height: number;
 
-        constructor(width: number, height: number)
+        public constructor(width: number, height: number)
         {
             if (width < 0)
             {

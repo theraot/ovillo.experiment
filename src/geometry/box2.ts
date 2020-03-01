@@ -1,19 +1,19 @@
-/// <reference path="position_holder.ts" />
+/// <reference path="vector2_holder.ts" />
 
 module Geometry
 {
-    export class Box implements PositionHolder, SizeHolder
+    export class Box2 implements Position2Holder, Size2Holder
     {
-        public position: Vector;
+        public position: Position2;
         public size: Size;
 
-        constructor(size: Size, position: Vector)
+        public constructor(size: Size, position: Position2)
         {
             this.position = position;
             this.size = size;
         }
 
-        public static checkOverlap(a: Box, b: Box)
+        public static checkOverlap(a: Box2, b: Box2)
         {
             let al = a.position.x;
             let at = a.position.y;
