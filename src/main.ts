@@ -20,7 +20,7 @@ module Game
     );
     compositionRoot.register(Geometry.Position2, positionStorage);
 
-    let verbs = new Structures.DiscriminatedCollection<Verb>(verb => verb.type);
+    let verbs = new Structures.DiscriminatedCollection<string, Verb>(verb => verb.type);
 
     function load()
     {

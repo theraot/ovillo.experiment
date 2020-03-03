@@ -1,26 +1,22 @@
 module Structures
 {
-    export class DiscriminatedCollection<T> implements Collection<T>
+    export class DiscriminatedCollection<Key, T>
     {
-        private readonly _discriminate: Ovillo.Converter<T, string>;
-        private readonly _data: Map<string, T>;
+        private readonly _keySelector: Ovillo.Converter<T, Key>;
+        private readonly _data: Map<Key, T>;
 
-        public constructor(discriminate: Ovillo.Converter<T, string>)
+        public constructor(keySelector: Ovillo.Converter<T, Key>)
         {
-            this._discriminate = discriminate;
-            this._data = new Map<string, T>();
+            this._keySelector = keySelector;
+            this._data = new Map<Key, T>();
         }
 
         public add(value: T): boolean
         {
-            let discrimination = this._discriminate(value);
-            this._data.has(discrimination)
-            {
-                return false;
-            }
-
-            this._data.set(discrimination, value);
-            return true;
+            let key = this._keySelector(value);
+            let result = this._data.has(key);
+            this._data.set(key, value);
+            return result;
         }
 
         public clear(): void
@@ -28,27 +24,37 @@ module Structures
             this._data.clear();
         }
 
-        public contains(value: T): boolean
+        public contains(key: Key): boolean
         {
-            let discrimination = this._discriminate(value);
-            return this._data.has(discrimination);
+            return this._data.has(key);
         }
 
-        public remove(value: T): boolean
+        public get(key: Key): Ovillo.Option<T>
         {
-            let discrimination = this._discriminate(value);
-            return this._data.delete(discrimination);
+            return Ovillo.Option(this._data.get(key));
         }
 
-        public set(value: T): void
+        public remove(key: Key): boolean
         {
-            let discrimination = this._discriminate(value);
-            this._data.set(discrimination, value);
+            return this._data.delete(key);
+        }
+
+        public set(value: T): void 
+        {
+            let key = this._keySelector(value);
+            this._data.set(key, value);
         }
 
         public get size(): number
         {
             return this._data.size;
+        }
+        
+        public take(key: Key): Ovillo.Option<T>
+        {
+            let result = Ovillo.Option(this._data.get(key));
+            this._data.delete(key);
+            return result;
         }
     }
 }
