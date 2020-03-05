@@ -24,7 +24,7 @@ module Game
 
     function load()
     {
-        window.addEventListener("click", (ev: MouseEvent) => verbs.add({type: "click", x: ev.x, y:ev.y}));
+        window.addEventListener("click", (ev: MouseEvent) => verbs.set({type: "click", x: ev.x, y:ev.y}));
     }
 
     function update(deltaSeconds: number)
