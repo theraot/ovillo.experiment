@@ -22,7 +22,7 @@ module Game
 
     let verbs = new Structures.DiscriminatedCollection<string, Verb>(verb => verb.type);
 
-    function load()
+    function load(window: Window)
     {
         window.addEventListener("click", (ev: MouseEvent) => verbs.set({type: "click", x: ev.x, y:ev.y}));
     }

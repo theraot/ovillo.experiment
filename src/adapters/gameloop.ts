@@ -1,36 +1,38 @@
 module Adapters
 {
+    const root = window;
+
     function ready(callback: () => void)
     {
-        if (document.readyState != 'loading')
+        if (root.document.readyState != 'loading')
         {
             callback();
         }
         else
         {
-            document.addEventListener('DOMContentLoaded', callback);
+            root.document.addEventListener('DOMContentLoaded', callback);
         }
     }
 
-    export function gameloop(load: () => void, update: (deltaSeconds: number) => void)
+    export function gameloop(load: (window: Window) => void, update: (deltaSeconds: number) => void)
     {
         ready
         (
             () =>
             {
-                load();
+                load(root);
                 
-                let lastMilliseconds = performance.now();
+                let lastMilliseconds = root.performance.now();
         
                 let step = (milliseconds: number) =>
                 {
                     let deltaSeconds = (milliseconds - lastMilliseconds) / 1000;
                     lastMilliseconds = milliseconds;
                     update(deltaSeconds);
-                    window.requestAnimationFrame(step);
+                    root.requestAnimationFrame(step);
                 }
 
-                window.requestAnimationFrame(step);
+                root.requestAnimationFrame(step);
             }
         )
     }
