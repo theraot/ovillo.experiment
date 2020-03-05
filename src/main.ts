@@ -5,7 +5,7 @@
 
 module Game
 {
-    let compositionRoot = new Ovillo.World();
+    let world = new Ovillo.World();
 
     let positionStorageSegments = new Structures.SparseArray2<Ovillo.ComponentStorage<Geometry.Position2>>();
     let positionStorage = new Ovillo.SegmentedComponentStorage<Geometry.Position2>
@@ -18,7 +18,7 @@ module Game
             return positionStorageSegments.getOrAdd(x, y, () => new Ovillo.DefaultComponentStorage<Geometry.Vector2>());
         }
     );
-    compositionRoot.register(Geometry.Position2, positionStorage);
+    world.register(Geometry.Position2, positionStorage);
 
     let verbs = new Structures.DiscriminatedCollection<string, Verb>(verb => verb.type);
 
