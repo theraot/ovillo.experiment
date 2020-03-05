@@ -1,6 +1,6 @@
 module Geometry
 {
-    export class Size
+    export class Size2
     {
         public readonly width: number;
         public readonly height: number;

@@ -24,7 +24,13 @@ module Game
 
     function load(window: Window)
     {
-        window.addEventListener("click", (ev: MouseEvent) => verbs.set({type: "click", x: ev.x, y:ev.y}));
+        let resize = () =>
+        {
+            verbs.set({type: "resize", size: {width: window.innerWidth, height: window.innerHeight}});
+        };
+        window.addEventListener("click", (ev: MouseEvent) => verbs.set({type: "click", position: {x: ev.x, y:ev.y}}));
+        window.addEventListener("resize", resize);
+        resize();
     }
 
     function update(deltaSeconds: number)

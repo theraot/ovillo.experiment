@@ -1,4 +1,5 @@
 module Game
 {
-    export type Verb = {readonly type: "click", readonly x: number, readonly y: number}
+    export type Verb = {readonly type: "click", readonly position: Geometry.Position2}
+                     | {readonly type: "resize", readonly size: Geometry.Size2}
 }
